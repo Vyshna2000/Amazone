@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Business: Verify Email</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f3f3;
+            /* Light gray background */
+            color: #333;
+        }
+
+        /* --- Header Section --- */
+        .header {
+            background-color: #232f3e;
+            /* Dark blue/gray Amazon Business header color */
+            color: #fff;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .progress-bar {
+            font-size: 14px;
+        }
+
+        .progress-bar .step {
+            margin-left: 20px;
+            color: #999;
+        }
+
+        .progress-bar .active {
+            color: #fff;
+            /* Current step is white */
+            font-weight: bold;
+        }
+
+        /* --- Main Content Section --- */
+        .main-container {
+            padding: 40px 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        .verification-box {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 30px 60px;
+            /* Wider padding to match the image */
+            max-width: 600px;
+            width: 100%;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            /* Center the text inside the box */
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .email-address {
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        /* --- Form Elements --- */
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            align-self: flex-start;
+            /* Align label to the left */
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+            /* Include padding/border in element's total width */
+        }
+
+        .create-button {
+            background-color: #ff9900;
+            /* Amazon's signature yellow/orange */
+            color: #111;
+            border: 1px solid #ff8f00;
+            border-radius: 3px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+
+        .create-button:hover {
+            background-color: #f79100;
+        }
+
+        /* --- Legal and Resend Links --- */
+        .legal-text {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .legal-text a,
+        .resend-otp {
+            color: #0066c0;
+            text-decoration: none;
+        }
+
+        .resend-otp {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            border-top: 1px solid #ddd;
+            padding: 15px 0;
+            text-align: center;
+            font-size: 12px;
+            color: #555;
+        }
+
+        footer a {
+            color: #0066c0;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        footer p {
+            margin-top: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <div class="logo">amazon business</div>
+        <nav class="progress-bar">
+            <span class="step active">ACCOUNT CREATION</span>
+            <span class="step">BUSINESS DETAILS</span>
+            <span class="step">FINISH</span>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <div class="verification-box">
+            <h2>Verify email address</h2>
+            <p>To verify your email, we've sent a **One Time Password (OTP)** to</p>
+            <p class="email-address">
+                jagdishmandhalkar1308@gmail.com
+                <a href="#">[Change]</a>
+            </p>
+
+            <form>
+                <label for="otp">Enter OTP</label>
+                <input type="text" id="otp" name="otp" required>
+
+                <button type="submit" class="create-button">Create your Amazon account</button>
+            </form>
+
+            <div class="legal-text">
+                By creating an account or logging in, you agree to Amazon's
+                <a href="#">Conditions of Use</a>, <a href="#">Privacy Notice</a>, and the
+                <a href="#">Amazon Business Terms and Conditions</a>. You agree that
+                you are creating this business account on behalf of your
+                organization and have authority to bind your organization.
+            </div>
+
+            <a href="#" class="resend-otp">Resend OTP</a>
+        </div>
+    </div>
+
+    <footer>
+        <a href="#">Conditions of Use</a> | <a href="#">Privacy Notice</a> | <a href="#">Help</a>
+        <p>&copy; 1996-2024, Amazon.com, Inc. or its affiliates</p>
+    </footer>
+
+</body>
+
+</html>

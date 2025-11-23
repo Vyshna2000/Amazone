@@ -1,0 +1,88 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+
+    <style>
+        body { font-family: Arial; background: #f2f2f2; }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .product-box {
+            display: flex;
+            gap: 30px;
+        }
+
+        img {
+            width: 300px;
+            border-radius: 10px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .add { background:#febd69; }
+        .buy { background:#ffa41c; margin-left:10px; }
+
+        .review {
+            background:#f3f3f3;
+            padding:10px;
+            border-radius:8px;
+            margin-bottom:10px;
+        }
+    </style>
+
+</head>
+<body>
+
+{% include 'header.html' %}
+
+<div class="container">
+
+    <div class="product-box">
+        <img src="{{ product.image.url }}" alt="{{ product.name }}">
+
+        <div>
+            <h1>{{ product.name }}</h1>
+            <h2>₹{{ product.price }}</h2>
+            <p>{{ product.description }}</p>
+
+            <!-- Add to Cart -->
+            <a href="{% url 'add_to_cart' product.id %}">
+                <button class="btn add">Add to Cart</button>
+            </a>
+
+            <!-- Buy Now goes to payment page -->
+            <a href="{% url 'payment' %}?product_id={{ product.id }}">
+                <button class="btn buy">Buy Now</button>
+            </a>
+        </div>
+    </div>
+
+    <h2>Reviews</h2>
+
+    {% for r in reviews %}
+        <div class="review">
+            <b>{{ r.user.first_name }}</b> ⭐ {{ r.rating }}/5
+            <p>{{ r.comment }}</p>
+        </div>
+    {% empty %}
+        <p>No reviews yet.</p>
+    {% endfor %}
+
+</div>
+   {% include 'footer.html' %}
+</body>
+</html>

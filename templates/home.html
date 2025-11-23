@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amazon Clone</title>
+
+<style>
+    /* Reset & Body */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Arial, sans-serif; background: #f2f2f2; }
+
+    /* Header */
+    .header {
+        background-color: #131921;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 20px;
+    }
+    .logo img { width: 100px; }
+    .search-box {
+        display: flex;
+        flex: 1;
+        max-width: 600px;
+        margin: 0 20px;
+    }
+    .search-box select, .search-box input, .search-box button {
+        padding: 10px;
+        border: none;
+        outline: none;
+    }
+    .search-box select { background: #e6e6e6; border-radius: 5px 0 0 5px; }
+    .search-box input { flex: 1; }
+    .search-box button { background: #febd69; cursor: pointer; border-radius: 0 5px 5px 0; }
+    .right-menu { display: flex; gap: 20px; font-size: 14px; }
+
+    /* Products Grid */
+    .products {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+    .product-card {
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    }
+    .product-card img {
+        width: 100%;
+        border-radius: 5px;
+        object-fit: cover;
+        height: 180px;
+        margin-bottom: 10px;
+    }
+    .product-card h4 {
+        font-size: 16px;
+        margin: 10px 0 5px;
+        color: #111;
+    }
+    .product-card p {
+        color: #388e3c;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .product-card form button {
+        width: 100%;
+        padding: 10px;
+        background: #febd69;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.2s;
+    }
+    .product-card form button:hover {
+        background: #f0b347;
+    }
+
+    /* Responsive */
+    @media(max-width: 768px) {
+        .header { flex-wrap: wrap; gap: 10px; }
+        .search-box { max-width: 100%; margin: 10px 0; }
+    }
+</style>
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">
+        <img src="{% static 'images/logo.png' %}" alt="Amazon Logo">
+    </div>
+    <div class="search-box">
+    <form method="GET" action="{% url 'products' %}" style="display:flex; width:100%;">
+        <select class="search-select" name="category">
+            <option value="">All</option>
+            <option value="electronics">Electronics</option>
+            <option value="books">Books</option>
+            <!-- Add more categories if needed -->
+        </select>
+
+        <input type="text" class="search-input" name="q" placeholder="Search Amazon.in" required>
+
+        <button type="submit" class="search-button">🔍</button>
+    </form>
+</div>
+
+<div class="right-menu">
+    {% if user.is_authenticated %}
+        <div>
+            Hello, {{ user.first_name }}<br>
+            <a href="{% url 'logout' %}" style="color:white; text-decoration:none; font-size:12px;">Logout</a>
+        </div>
+        <div>Returns<br>& Orders</div>
+        <div>
+            <a href="{% url 'cart' %}" style="color:white; text-decoration:none;">
+                🛒 Cart
+            </a>
+        </div>
+    {% else %}
+        <a href="{% url 'signin' %}" style="color:white; text-decoration:none;">
+            <div>Hello, Sign in<br>Account & Lists</div>
+        </a>
+    {% endif %}
+</div>
+</header>
+
+<section class="products">
+    {% for product in products %}
+    <div class="product-card">
+        <a href="{% url 'product_detail' product.id %}">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% endif %}
+            <h4>{{ product.name }}</h4>
+        </a>
+        <p>₹{{ product.price }}</p>
+        <form method="POST" action="{% url 'add_to_cart' product.id %}">
+            {% csrf_token %}
+            <button type="submit">Add to Cart</button>
+        </form>
+        
+    </div>
+    {% endfor %}
+</section>
+   {% include 'footer.html' %}
+</body>
+</html>
